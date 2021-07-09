@@ -11,7 +11,8 @@ class TrendingResultRepository @Inject constructor(private val apiService: ApiSe
 
     fun getTrending(
         mediaType: String = MediaType.ALL.toString(),
-        timeWindow: String = TimeWindow.DAY.toString()
-    ) = apiService.getTrending(mediaType, timeWindow)
+        timeWindow: String = TimeWindow.DAY.toString(),
+        page: Int = 1
+    ) = apiService.getTrending(mediaType, timeWindow, page)
 
 }

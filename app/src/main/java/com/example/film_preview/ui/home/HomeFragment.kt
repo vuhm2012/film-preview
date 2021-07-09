@@ -3,6 +3,7 @@ package com.example.film_preview.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.film_preview.R
 import com.example.film_preview.base.BaseFragment
@@ -13,12 +14,12 @@ import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
 
-    private val binding: FragmentHomeBinding
-        get() = (getViewBinding() as FragmentHomeBinding)
-
-    private lateinit var adapter: HomeAdapter
     @Inject
     lateinit var trendingResult: TrendingResultViewModel
+    private lateinit var adapter: HomeAdapter
+
+    private val binding: FragmentHomeBinding
+        get() = (getViewBinding() as FragmentHomeBinding)
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
@@ -31,7 +32,7 @@ class HomeFragment : BaseFragment() {
         adapter = HomeAdapter(requireContext(), onClick)
 
         binding.rcvHome.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = adapter
         }

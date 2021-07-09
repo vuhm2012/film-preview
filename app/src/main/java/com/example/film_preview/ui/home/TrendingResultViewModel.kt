@@ -1,6 +1,7 @@
 package com.example.film_preview.ui.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.film_preview.data.repository.TrendingResultRepository
 import com.example.film_preview.model.TrendingResult
@@ -21,9 +22,10 @@ class TrendingResultViewModel @Inject constructor(
 
     fun getTrending(
         mediaType: String = MediaType.ALL.toString(),
-        timeWindow: String = TimeWindow.DAY.toString()
+        timeWindow: String = TimeWindow.DAY.toString(),
+        page: Int = 1
     ): LiveData<TrendingResult> =
-        trendingResultRepository.getTrending(mediaType, timeWindow)
+        trendingResultRepository.getTrending(mediaType, timeWindow, page)
             .subscribeOn(Schedulers.io())
             .toLiveData()
 

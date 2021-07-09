@@ -15,11 +15,12 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("/trending/{media_type}/{time_window}")
+    @GET("trending/{media_type}/{time_window}")
     fun getTrending(
         @Path("media_type") mediaType: String = MediaType.ALL.toString(),
         @Path("time_window") timeWindow: String = TimeWindow.DAY.toString(),
-        @Query("api_key") apiKey: String = API_KEY
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = API_KEY,
     ): Single<TrendingResult>
 
     companion object {
