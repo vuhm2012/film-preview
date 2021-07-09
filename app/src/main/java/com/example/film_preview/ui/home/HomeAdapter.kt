@@ -4,18 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.film_preview.R
-import com.example.film_preview.model.FilmDetail
+import com.example.film_preview.model.Movie
 
 class HomeAdapter(
     private val context: Context,
-    private val onClick: (FilmDetail) -> Unit
+    private val onClick: (Movie) -> Unit
 ): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    private var films: List<FilmDetail> = listOf()
+    private var films: List<Movie> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
         val view =LayoutInflater.from(context).inflate(R.layout.home_film_item, parent, false)
@@ -29,7 +28,7 @@ class HomeAdapter(
 
     override fun getItemCount(): Int = films.size
 
-    fun setData(films: List<FilmDetail>) {
+    fun setData(films: List<Movie>) {
         this.films = films
     }
 
@@ -37,8 +36,8 @@ class HomeAdapter(
 
         private var text: TextView = itemView.findViewById(R.id.text)
 
-        fun onBind(filmDetail: FilmDetail, onClick: (FilmDetail) -> Unit) {
-            text.text = filmDetail.posterPath
+        fun onBind(movie: Movie, onClick: (Movie) -> Unit) {
+            text.text = movie.posterPath
         }
 
     }

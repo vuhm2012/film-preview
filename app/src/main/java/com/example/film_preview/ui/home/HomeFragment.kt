@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.film_preview.R
 import com.example.film_preview.base.BaseFragment
 import com.example.film_preview.databinding.FragmentHomeBinding
-import com.example.film_preview.model.FilmDetail
+import com.example.film_preview.model.Movie
 import com.example.film_preview.ui.MainActivity
-import com.example.film_preview.view_model.TrendingFilmViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment() {
@@ -20,9 +17,15 @@ class HomeFragment : BaseFragment() {
         get() = (getViewBinding() as FragmentHomeBinding)
 
     private lateinit var adapter: HomeAdapter
-//    @Inject lateinit var trendingFilmViewModel: TrendingFilmViewModel
+    @Inject
+    lateinit var trendingResult: TrendingResultViewModel
 
     override fun getLayoutId(): Int = R.layout.fragment_home
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).appComponent.inject(this)
+    }
 
     override fun initControls(view: View, savedInstanceState: Bundle?) {
         adapter = HomeAdapter(requireContext(), onClick)
@@ -32,14 +35,12 @@ class HomeFragment : BaseFragment() {
             setHasFixedSize(true)
             adapter = adapter
         }
-//        trendingFilmViewModel.getTrending()
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe {
-//                adapter.setData(it)
-//                adapter.notifyDataSetChanged()
-//            }
 
+        trendingResult.getTrending().observe(viewLifecycleOwner) {
+            adapter.setData(it.movies)
+            adapter.notifyDataSetChanged()
+            binding.rcvHome.adapter = adapter
+        }
 
     }
 
@@ -48,7 +49,7 @@ class HomeFragment : BaseFragment() {
     }
 
 
-    private val onClick: (FilmDetail) -> Unit = {
+    private val onClick: (Movie) -> Unit = {
 
     }
 

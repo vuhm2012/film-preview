@@ -6,23 +6,23 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.film_preview.R
 import com.example.film_preview.base.BaseActivity
 import com.example.film_preview.databinding.ActivityMainBinding
-import com.example.film_preview.di.MyApplication
-import com.example.film_preview.view_model.TrendingFilmViewModel
-import javax.inject.Inject
+import com.example.film_preview.MyApplication
+import com.example.film_preview.di.AppComponent
 
 class MainActivity : BaseActivity() {
 
+    lateinit var appComponent: AppComponent
+
     private val binding: ActivityMainBinding
         get() = (getViewBinding() as ActivityMainBinding)
-
-
 
     private val controller by lazy {
         findNavController(R.id.nav_host_fragment)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as MyApplication).appComponent.inject(this)
+        appComponent = (applicationContext as MyApplication).appComponent
+        appComponent.inject(this)
         super.onCreate(savedInstanceState)
     }
 
