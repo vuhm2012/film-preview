@@ -1,11 +1,29 @@
 <resources>
 
-    <string name="app_name">film-preview</string>
+    <string name="app_name">Film Preview</string>
 
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="favourite">Favourite</string>
     <string name="account">Account</string>
+    <string name="rating">Rating:</string>
+    <string name="overview">Overview</string>
+    <string name="release_date">Release Date</string>
+    <string name="search_hint">Search</string>
+    <string name="next"></string>
+    <string name="previous">Previous</string>
+
+    <string-array name="media_type_array">
+        <item>All</item>
+        <item>Movie</item>
+        <item>Tv</item>
+        <item>Person</item>
+    </string-array>
+
+    <string-array name="time_window">
+        <item>Week</item>
+        <item>Day</item>
+    </string-array>
 
 
 </resources>

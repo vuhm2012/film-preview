@@ -22,7 +22,7 @@ class TrendingResultViewModel @Inject constructor(
 
     fun getTrending(
         mediaType: String = MediaType.ALL.toString(),
-        timeWindow: String = TimeWindow.DAY.toString(),
+        timeWindow: String = TimeWindow.WEEK.toString(),
         page: Int = 1
     ): LiveData<TrendingResult> =
         trendingResultRepository.getTrending(mediaType, timeWindow, page)

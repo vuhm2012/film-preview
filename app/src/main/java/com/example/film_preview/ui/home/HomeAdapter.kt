@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.film_preview.R
@@ -39,10 +40,14 @@ class HomeAdapter(
 
         private val text: TextView = itemView.findViewById(R.id.txt_title)
         private val imgPoster: ImageView = itemView.findViewById(R.id.img_poster_home)
+        private val cardFilm: CardView = itemView.findViewById(R.id.card_film)
 
         fun onBind(movie: Movie, onClick: (Movie) -> Unit) {
             text.text = movie.title
             Glide.with(context).load(posterPath + movie.posterPath).into(imgPoster)
+            cardFilm.setOnClickListener {
+                onClick(movie)
+            }
         }
 
     }

@@ -31,6 +31,7 @@ class MainActivity : BaseActivity() {
 
     override fun initControls(savedInstanceState: Bundle?) {
         binding.bottomNavigation.setupWithNavController(controller)
+        setSupportActionBar(binding.toolbarHome)
     }
 
     override fun initEvents() {

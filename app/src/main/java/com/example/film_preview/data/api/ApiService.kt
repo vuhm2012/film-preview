@@ -18,7 +18,7 @@ interface ApiService {
     @GET("trending/{media_type}/{time_window}")
     fun getTrending(
         @Path("media_type") mediaType: String = MediaType.ALL.toString(),
-        @Path("time_window") timeWindow: String = TimeWindow.DAY.toString(),
+        @Path("time_window") timeWindow: String = TimeWindow.WEEK.toString(),
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = API_KEY,
     ): Single<TrendingResult>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,10 +12,74 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
+        <LinearLayout
+            android:id="@+id/spinner_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/spinner_media_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/SpinnerStyle" />
+
+            <Spinner
+                android:id="@+id/spinner_time_window"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/SpinnerStyle" />
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/page_layout"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_layout" />
+
+        <LinearLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/page_layout"
+            android:paddingHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_previous"
+                android:layout_weight="1"
+                android:backgroundTint="@color/background"
+                app:iconGravity="textStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_previous" />
+
+            <TextView
+                android:id="@+id/txt_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next"
+                android:backgroundTint="@color/background"
+                app:iconGravity="textStart"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_next" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

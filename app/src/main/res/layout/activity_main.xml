@@ -10,19 +10,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         tools:context=".ui.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar_layout"
+            android:id="@+id/app_bar_layout_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_menu"
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
+
 
         <fragment
             android:id="@+id/nav_host_fragment"
@@ -33,13 +38,15 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout_home"
             app:navGraph="@navigation/nav_graph" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:itemIconTint="@drawable/bottom_bar_color"
+            app:itemTextColor="@drawable/bottom_bar_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_menu" />
 

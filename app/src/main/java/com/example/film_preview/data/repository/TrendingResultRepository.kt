@@ -1,5 +1,7 @@
 package com.example.film_preview.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.film_preview.data.api.ApiService
 import com.example.film_preview.utils.MediaType
 import com.example.film_preview.utils.TimeWindow
@@ -11,7 +13,7 @@ class TrendingResultRepository @Inject constructor(private val apiService: ApiSe
 
     fun getTrending(
         mediaType: String = MediaType.ALL.toString(),
-        timeWindow: String = TimeWindow.DAY.toString(),
+        timeWindow: String = TimeWindow.WEEK.toString(),
         page: Int = 1
     ) = apiService.getTrending(mediaType, timeWindow, page)
 
