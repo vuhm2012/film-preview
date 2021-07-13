@@ -28,7 +28,6 @@ class HomeFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
     private lateinit var adapter: HomeAdapter
     private var mediaType: String = MediaType.ALL.toString()
     private var timeWindow: String = TimeWindow.WEEK.toString()
-    private var page = 1
 
     private val binding: FragmentHomeBinding
         get() = (getViewBinding() as FragmentHomeBinding)
@@ -42,33 +41,37 @@ class HomeFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
 
     override fun initControls(view: View, savedInstanceState: Bundle?) {
         adapter = HomeAdapter(requireContext(), onClick)
-        if(page == 1) {
-//            binding.btnPrevious.isEnabled = false
+        trendingResult.currentPage = 1
+        trendingResult.currentPageLiveData.value = trendingResult.currentPage
+        trendingResult.currentPageLiveData.observe(viewLifecycleOwner) { page ->
+            binding.btnPrevious.isEnabled = page != 1
+            trendingResult.getTrending(page = page).observe(viewLifecycleOwner) {
+                adapter.setData(it.movies)
+                adapter.notifyDataSetChanged()
+                binding.rcvHome.adapter = adapter
+                binding.txtPage.text = page.toString() + "/" + it.totalPages
+                binding.btnNext.isEnabled = page != it.totalPages
+            }
         }
-        binding.txtPage.text = page.toString()
+
         binding.rcvHome.apply {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = adapter
         }
 
-        trendingResult.getTrending(page = page).observe(viewLifecycleOwner) {
-            adapter.setData(it.movies)
-            adapter.notifyDataSetChanged()
-            binding.rcvHome.adapter = adapter
-        }
-
         createSpinners()
-
-
-
     }
 
     override fun initEvent() {
         binding.spinnerMediaType.onItemSelectedListener = this
         binding.spinnerTimeWindow.onItemSelectedListener = this
         binding.btnNext.setOnClickListener {
-            page++
+            trendingResult.currentPageLiveData.value = ++trendingResult.currentPage
+        }
+
+        binding.btnPrevious.setOnClickListener {
+            trendingResult.currentPageLiveData.value = --trendingResult.currentPage
         }
     }
 
@@ -106,10 +109,12 @@ class HomeFragment : BaseFragment(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         mediaType = binding.spinnerMediaType.selectedItem.toString()
         timeWindow = binding.spinnerTimeWindow.selectedItem.toString()
-        trendingResult.getTrending(mediaType, timeWindow, page).observe(viewLifecycleOwner) {
+        trendingResult.getTrending(mediaType, timeWindow, 1).observe(viewLifecycleOwner) {
             adapter.setData(it.movies)
             adapter.notifyDataSetChanged()
             binding.rcvHome.adapter = adapter
+            trendingResult.currentPage = 1
+            trendingResult.currentPageLiveData.value = trendingResult.currentPage
         }
     }
 

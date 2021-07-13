@@ -2,9 +2,7 @@ package com.example.film_preview.data.api
 
 import com.example.film_preview.model.TrendingResult
 import com.example.film_preview.utils.MediaType
-import com.example.film_preview.utils.Resource
 import com.example.film_preview.utils.TimeWindow
-import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,6 +19,13 @@ interface ApiService {
         @Path("time_window") timeWindow: String = TimeWindow.WEEK.toString(),
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = API_KEY,
+    ): Single<TrendingResult>
+
+    @GET("search/movie")
+    fun searchMovie(
+        @Query("query") searchQuery: String = "",
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = API_KEY
     ): Single<TrendingResult>
 
     companion object {

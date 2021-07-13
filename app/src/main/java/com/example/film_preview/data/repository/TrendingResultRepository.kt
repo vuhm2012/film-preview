@@ -17,4 +17,9 @@ class TrendingResultRepository @Inject constructor(private val apiService: ApiSe
         page: Int = 1
     ) = apiService.getTrending(mediaType, timeWindow, page)
 
+    fun searchMovie(
+        searchQuery: String = "",
+        page: Int = 1,
+    ) = apiService.searchMovie(searchQuery, page)
+
 }
