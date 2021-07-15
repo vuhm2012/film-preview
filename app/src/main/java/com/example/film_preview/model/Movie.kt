@@ -13,7 +13,6 @@ data class Movie(
     @SerializedName("adult") var adult: Boolean = false,
     @SerializedName("overview") var overview: String = "",
     @SerializedName("release_date") var releaseDate: String = "",
-    @SerializedName("genre_ids") var genreIds: List<Integer> = listOf(),
     @SerializedName("original_language") var originalLanguage: String = "",
     @SerializedName("backdrop_path") var backdropPath: String = "",
     @SerializedName("popularity") var popularity: Double = 0.0,

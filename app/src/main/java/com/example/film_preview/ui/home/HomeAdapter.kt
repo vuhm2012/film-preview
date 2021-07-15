@@ -21,7 +21,7 @@ class HomeAdapter(
     private var films: List<Movie> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.home_film_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.film_item, parent, false)
         return ViewHolder(view)
     }
 

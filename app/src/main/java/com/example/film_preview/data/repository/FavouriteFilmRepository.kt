@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import com.example.film_preview.data.database.FavouriteFilmDao
 import com.example.film_preview.model.Movie
+import com.example.film_preview.utils.toLiveData
+import io.reactivex.BackpressureStrategy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -13,9 +15,5 @@ class FavouriteFilmRepository @Inject constructor(private val favouriteFilmDao: 
 
     fun removeFavourite(movie: Movie) = favouriteFilmDao.removeFavourite(movie)
 
-    fun getAllFavourite(): LiveData<List<Movie>> = LiveDataReactiveStreams.fromPublisher(
-        favouriteFilmDao.getAllFavourite().subscribeOn(
-            Schedulers.io()
-        )
-    )
+    fun getAllFavourite()= favouriteFilmDao.getAllFavourite()
 }
