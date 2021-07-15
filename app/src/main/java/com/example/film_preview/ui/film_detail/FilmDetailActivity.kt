@@ -54,7 +54,7 @@ class FilmDetailActivity : BaseActivity() {
 
         binding.btnAddFavourite.setOnClickListener {
             favouriteFilmViewModel.addFavourite(movie)
-            Toast.makeText(this, "Oke", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${movie.title} is add to your favourite", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -10,8 +10,9 @@
     <string name="overview">Overview</string>
     <string name="release_date">Release Date</string>
     <string name="search_hint">Search</string>
-    <string name="next"></string>
+    <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="add_favourite">Add to Favourite</string>
 
     <string-array name="media_type_array">
         <item>All</item>
